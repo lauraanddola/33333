@@ -40,7 +40,8 @@ pipeline {
                         #echo "Name read from file - $name"
                         if [[ $line == *$prefix_head* ]]; then 
                            echo "Match is $line"; 
-                           substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g' | sed 's/\/\///g'`
+                           substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g' `
+                           substr=${substr:2:}
                            echo "888: $substr"
                            branch_array+=("$substr")
       

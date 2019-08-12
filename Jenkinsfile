@@ -25,6 +25,11 @@ pipeline {
         stage('test') {
             steps {
                 sh 'echo "execute say hello script:"'
+                sh 'rm -rf 0812_test branch_all.txt'
+                sh 'git clone https://github.com/lauraanddola/pipeline666.git 0812_test'
+                sh 'git branch -a'
+                sh 'git branch -a > branch_all.txt'
+                sh 'cat branch_all.txt'
                 sayHello("Laura")
                  script {
 

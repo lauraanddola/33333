@@ -35,6 +35,7 @@ pwd
                      git branch -a |while read  line; do
                          name="$line"
                          if [[ $line == *$prefix_head* ]]; then 
+                             git branch
                              echo "Match is $line"; 
                              substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
                               echo "888: $substr"
@@ -57,6 +58,7 @@ pwd
   echo "[Start]restore orgin to source..."
   
   pwd
+  git branch
   rm -rf 0812_test
   git clone https://github.com/lauraanddola/pipeline666.git 0812_test
 

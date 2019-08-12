@@ -55,14 +55,14 @@ pwd
 
                    declare -a  abc=("linux" "flora" "unixt")  
                    declare -i x=0
-                   
+                   declare -i y=1
                    for branch_item in ${branch_array[*]}
                    do
                         pwd
                         ls -lrt
                         
                         git clone https://github.com/lauraanddola/pipeline666.git ${abc[$x]}
-                        x = $x + 1
+                        x = $((x + y))
                         ls -ltr
                         cd ${a[i]}
                         echo "Start to sync $branch_item"

@@ -54,12 +54,10 @@ pwd
                      done < "$filename"
 
 
-                  // rm -rf 0812_test
                    for branch_item in ${branch_array[*]}
                    do
                         pwd
                         ls -lrt
-                     //   rm -rf 0812_test
                         i=0
                         aaa =["111-test", "2222-test", "333-test" ]
                         git clone https://github.com/lauraanddola/pipeline666.git ${a[i]}

@@ -41,7 +41,8 @@ pipeline {
                               branch_array+=("${substr:2}")
     
                               echo "66666: ${substr:2}"
-        git checkout ${substr:2}
+        
+      git checkout ${substr:2}
   git fetch --tags
   git tag
   git branch -a
@@ -54,9 +55,9 @@ pipeline {
   echo "End of sync ${substr:2}"
   
   echo "[Start]restore orgin to source..."
-    git remote rm origin
-  git remote add origin https://github.com/lauraanddola/pipeline666.git 
-  git remote -v
+  rm -rf 0812_test
+  git clone https://github.com/lauraanddola/pipeline666.git 0812_test
+
   echo "[End]restore for next loop..."
      
                           fi

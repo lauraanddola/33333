@@ -58,6 +58,19 @@ pwd
                    for branch_item in ${branch_array[*]}
                    do
                         echo "Start to sync $branch_item"
+                         git branch
+                         git checkout $branch_item
+  git fetch --tags
+  git tag
+  git branch -a
+  git remote -v
+  git remote rm origin
+  git remote add origin https://github.com/lauraanddola/pipeline0812.git
+  git remote -v
+  git push origin --all
+  git push --tags
+  echo "End of sync $branch_item"
+
                    done
 
                     echo "2222" '''

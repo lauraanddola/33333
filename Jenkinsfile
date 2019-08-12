@@ -61,7 +61,7 @@ pwd
                         ls -lrt
                         
                         git clone https://github.com/lauraanddola/pipeline666.git ${abc[x]}
-                        i = i + 1
+                        i = $i + 1
                         ls -ltr
                         cd ${a[i]}
                         echo "Start to sync $branch_item"

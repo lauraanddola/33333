@@ -61,10 +61,10 @@ pwd
                         pwd
                         ls -lrt
                         
-                        git clone https://github.com/lauraanddola/pipeline666.git ${abc[$x]}
+                        git clone https://github.com/lauraanddola/pipeline666.git ${abc[$(x)]}
                         x = $((x + y))
                         ls -ltr
-                        cd ${a[i]}
+                        cd ${abc[$(x)]}
                         echo "Start to sync $branch_item"
                          git branch
                          git checkout $branch_item

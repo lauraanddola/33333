@@ -33,9 +33,9 @@ pipeline {
                 
                 sh 'filename="branch_all.txt"'
                 sh 'prefix_head="remotes/origin/"'
-                sh 'unset branch_array
+                sh 'unset branch_array'
 
-                    while read -r line; do
+                sh  ' while read -r line; do
                         name="$line"
                         #echo "Name read from file - $name"
                         if [[ $line == *$prefix_head* ]]; then 

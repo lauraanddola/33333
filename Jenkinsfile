@@ -30,7 +30,7 @@ pipeline {
                 sh 'git branch -a'
                 sh '''branch_array = $(git branch -a |grep remotes/origin/ | sed 's/remotes//g' | sed 's/origin//g' )
                   
-                
+                     echo "$branch_array"           
                   // filename="${currentpath}/branch_all.txt"
                    prefix_head="remotes/origin/"
                   // unset branch_array
@@ -49,10 +49,10 @@ pipeline {
                     //done < "$filename"
                     echo "1111"
 
-                    for branch_item in ${branch_array[*]}
-                    do
-                        echo "Start to sync $branch_item"
-                    done
+                   # for branch_item in ${branch_array[*]}
+                   # do
+                    #    echo "Start to sync $branch_item"
+                    #done
 
                     echo "2222" '''
 

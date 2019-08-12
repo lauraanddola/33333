@@ -61,7 +61,7 @@ pwd
                         pwd
                         ls -lrt
                         
-                        git clone https://github.com/lauraanddola/pipeline666.git ${abc[x]}
+                        git clone https://github.com/lauraanddola/pipeline666.git ${abc[$x]}
                         x = $x + 1
                         ls -ltr
                         cd ${a[i]}

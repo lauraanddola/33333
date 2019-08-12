@@ -28,26 +28,27 @@ pipeline {
                 sh 'rm -rf 0812_test branch_all.txt'
                 sh 'git clone https://github.com/lauraanddola/pipeline666.git 0812_test'
                 sh 'git branch -a'
-                sh 'git branch -a > ${currentpath}/branch_all.txt'
-                sh 'cat ${currentpath}/branch_all.txt'
+                sh ```branch_array = ( $(git branch -a))
+                  
                 
-                sh 'filename="${currentpath}/branch_all.txt"'
-                sh 'prefix_head="remotes/origin/"'
-                sh '''unset branch_array
+                  // filename="${currentpath}/branch_all.txt"
+                   prefix_head="remotes/origin/"
+                  // unset branch_array
 
-                    while read -r line; do
-                        name="$line"
+                    //while read -r line; do
+                      //  name="$line"
                         #echo "Name read from file - $name"
-                        if [[ $line == *$prefix_head* ]]; then 
-                           echo "Match is $line"; 
-                           substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g' `
-                           substr=${substr:2:}
-                           echo "888: $substr"
-                           branch_array+=("$substr")
+                       // if [[ $line == *$prefix_head* ]]; then 
+                         //  echo "Match is $line"; 
+                           //substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g' `
+                           //substr=${substr:2:}
+                           //echo "888: $substr"
+                          // branch_array+=("$substr")
       
-                        fi
-                    done < "$filename"
+                        //fi
+                    //done < "$filename"
                     echo "1111"
+
                     for branch_item in ${branch_array[*]}
                     do
                         echo "Start to sync $branch_item"

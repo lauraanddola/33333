@@ -59,8 +59,13 @@ pwd
                    do
                         pwd
                         ls -lrt
-                        rm -rf 0812_test
-                        git clone https://github.com/lauraanddola/pipeline666.git 0812_test
+                     //   rm -rf 0812_test
+                        i=0
+                        aaa =["111-test", "2222-test", "333-test" ]
+                        git clone https://github.com/lauraanddola/pipeline666.git ${a[i]}
+                        i = i + 1
+                        ls -ltr
+                        cd ${a[i]}
                         echo "Start to sync $branch_item"
                          git branch
                          git checkout $branch_item
@@ -74,7 +79,9 @@ pwd
   git push origin --all
   git push --tags
   echo "End of sync $branch_item"
-
+  pwd
+  cd ..
+  pwd
                    done
 
                     echo "2222" '''

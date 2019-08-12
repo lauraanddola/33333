@@ -30,6 +30,30 @@ pipeline {
                 sh 'git branch -a'
                 sh 'git branch -a > branch_all.txt'
                 sh 'cat branch_all.txt'
+                
+                sh 'filename="branch_all.txt"'
+                sh 'prefix_head="remotes/origin/"'
+                sh 'unset branch_array
+
+                    while read -r line; do
+                        name="$line"
+                        #echo "Name read from file - $name"
+                        if [[ $line == *$prefix_head* ]]; then 
+                           echo "Match is $line"; 
+                           substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g' | sed 's/\/\///g'`
+                           echo "888: $substr"
+                           branch_array+=("$substr")
+      
+                        fi
+                    done < "$filename"
+                    echo "1111"
+                    for branch_item in ${branch_array[*]}
+                    do
+                        echo "Start to sync $branch_item"
+                    done
+
+                    echo "2222"'
+
                 sayHello("Laura")
                  script {
 

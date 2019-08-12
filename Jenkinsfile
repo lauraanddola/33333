@@ -52,37 +52,20 @@ pwd
       
                         fi
                      done < "$filename"
-
-                   //for branch_item in ${branch_array[*]}
-                   //do
-                        pwd
-                        ls -lrt
-                        
-                        git clone https://github.com/lauraanddola/pipeline666.git 111
-                        cd 111
-                         echo "Start to sync $branch_item"
-                         git branch
-                         git checkout laura
-  git fetch --tags
-  git tag
-  git branch -a
-  git remote -v
-  git remote rm origin
-  git remote add origin https://github.com/lauraanddola/pipeline0812.git
-  git remote -v
-  git push origin --all
-  git push --tags
-  echo "End of sync laura"
-  pwd
-  cd ..
-  pwd
-       
                    
- git clone https://github.com/lauraanddola/pipeline666.git 222
-                        cd 222
-                         echo "Start to sync master"
-                         git branch
-                         git checkout master
+                   
+
+                    echo "1111"
+for branch_item in ${branch_array[*]}
+do
+  echo "Start to sync $branch_item"
+  
+  pwd
+  git clone https://github.com/lauraanddola/pipeline666.git $branch_item
+  cd $branch_item
+  pwd
+
+  git checkout $branch_item
   git fetch --tags
   git tag
   git branch -a
@@ -92,35 +75,11 @@ pwd
   git remote -v
   git push origin --all
   git push --tags
-  echo "End of sync master"
-  pwd
+  echo "End of sync $branch_item"
   cd ..
   pwd
-
-
- git clone https://github.com/lauraanddola/pipeline666.git 333
-                        cd 333
-                         echo "Start to sync 3333"
-                         git branch
-                         git checkout 333
-  git fetch --tags
-  git tag
-  git branch -a
-  git remote -v
-  git remote rm origin
-  git remote add origin https://github.com/lauraanddola/pipeline0812.git
-  git remote -v
-  git push origin --all
-  git push --tags
-  echo "End of sync 333"
-  pwd
-  cd ..
-  pwd
-    
-
-   //                done
-
-
+  echo "3333"
+done
 
 
                     echo "2222" '''

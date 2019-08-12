@@ -29,7 +29,8 @@ pipeline {
                 sh 'git clone https://github.com/lauraanddola/pipeline666.git 0812_test'
                 sh 'git branch -a'
                 sh '''
-                     
+                     unset branch_array
+  
                      prefix_head="remotes/origin/"
                      git branch -a |while read  line; do
     name="$line"
@@ -44,10 +45,10 @@ done
              
 
 
-                   # for branch_item in ${branch_array[*]}
-                   # do
-                    #    echo "Start to sync $branch_item"
-                    #done
+                   for branch_item in ${branch_array[*]}
+                   do
+                        echo "Start to sync $branch_item"
+                   done
 
                     echo "2222" '''
 

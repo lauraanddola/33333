@@ -37,17 +37,12 @@ pipeline {
       echo "Match is $line"; 
      substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
      echo "888: $substr"
-     branch_array+=("$substr")
+     branch_array+=("$substr:2")
       
    fi
 done
              
 
-                     readarray -t TMP <<< $(git branch -a |grep remotes/origin/ | sed 's/remotes//g' | sed 's/origin//g')
-                     for STATUS in "${TMP[@]##* }"
-                     do 
-                          echo "$STATUS"
-                     done
 
                    # for branch_item in ${branch_array[*]}
                    # do

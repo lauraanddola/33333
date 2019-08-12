@@ -29,9 +29,11 @@ pipeline {
                 sh 'git clone https://github.com/lauraanddola/pipeline666.git 0812_test'
                 sh 'git branch -a'
                 sh '''
-                     branch_array =( $(git branch -a |grep remotes/origin/ | sed 's/remotes//g' | sed 's/origin//g') )
-                  
-                     echo "$branch_array"           
+                     readarray -t TMP <<< $(git branch -a |grep remotes/origin/ | sed 's/remotes//g' | sed 's/origin//g')
+                     for STATUS in "${TMP[@]##* }"
+                     do 
+                          echo "$STATUS"
+                     done
 
                    # for branch_item in ${branch_array[*]}
                    # do

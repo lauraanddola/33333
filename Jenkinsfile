@@ -29,6 +29,20 @@ pipeline {
                 sh 'git clone https://github.com/lauraanddola/pipeline666.git 0812_test'
                 sh 'git branch -a'
                 sh '''
+                     
+                     prefix_head="remotes/origin/"
+                     git branch -a |while read  line; do
+    name="$line"
+    if [[ $line == *$prefix_head* ]]; then 
+      echo "Match is $line"; 
+     substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
+     echo "888: $substr"
+     branch_array+=("$substr")
+      
+   fi
+done
+             
+
                      readarray -t TMP <<< $(git branch -a |grep remotes/origin/ | sed 's/remotes//g' | sed 's/origin//g')
                      for STATUS in "${TMP[@]##* }"
                      do 

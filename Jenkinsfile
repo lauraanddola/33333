@@ -53,6 +53,12 @@ pipeline {
   git push --tags
   echo "End of sync ${substr:2}"
   
+  echo "[Start]restore orgin to source..."
+    git remote rm origin
+  git remote add origin https://github.com/lauraanddola/pipeline666.git 
+  git remote -v
+  echo "[End]restore for next loop..."
+     
                           fi
                       done
              

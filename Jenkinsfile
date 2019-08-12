@@ -41,7 +41,18 @@ pipeline {
                               branch_array+=("${substr:2}")
     
                               echo "66666: ${substr:2}"
-        
+        git checkout ${substr:2}
+  git fetch --tags
+  git tag
+  git branch -a
+  git remote -v
+  git remote rm origin
+  git remote add origin https://github.com/lauraanddola/pipeline0812.git
+  git remote -v
+  git push origin --all
+  git push --tags
+  echo "End of sync ${substr:2}"
+  
                           fi
                       done
              

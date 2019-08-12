@@ -30,7 +30,7 @@ pipeline {
                 sh 'git branch -a'
                 sh '''
                      unset branch_array
-  
+pwd  
                      prefix_head="remotes/origin/"
                      git branch -a |while read  line; do
                          name="$line"
@@ -55,6 +55,8 @@ pipeline {
   echo "End of sync ${substr:2}"
   
   echo "[Start]restore orgin to source..."
+  
+  pwd
   rm -rf 0812_test
   git clone https://github.com/lauraanddola/pipeline666.git 0812_test
 

@@ -37,21 +37,21 @@ pwd
                      chmod 777 branch_all.txt
 
                      filename="branch_all.txt"
-prefix_head="remotes/origin/"
-unset branch_array
+                     prefix_head="remotes/origin/"
+                     unset branch_array
 
                      
                      while read -r line; do
-    name="$line"
-    #echo "Name read from file - $name"
-    if [[ $line == *$prefix_head* ]]; then 
-      echo "Match is $line"; 
-     substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
-     echo "888: $substr"
-     branch_array+=("$substr")
+                        name="$line"
+                        #echo "Name read from file - $name"
+                        if [[ $line == *$prefix_head* ]]; then 
+                        echo "Match is $line"; 
+                        substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
+                        echo "888: $substr"
+                        branch_array+=("${substr:2}")
       
-   fi
-done < "$filename"
+                        fi
+                     done < "$filename"
 
 
 

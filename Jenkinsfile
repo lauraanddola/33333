@@ -54,12 +54,13 @@ pwd
                      done < "$filename"
 
                    declare -a  abc=("linux" "flora" "unixt")  
+                   declare -i x=0
                    for branch_item in ${branch_array[*]}
                    do
                         pwd
                         ls -lrt
-                        i=0
-                        git clone https://github.com/lauraanddola/pipeline666.git ${abc[i]}
+                        
+                        git clone https://github.com/lauraanddola/pipeline666.git ${abc[x]}
                         i = i + 1
                         ls -ltr
                         cd ${a[i]}

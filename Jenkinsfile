@@ -28,10 +28,10 @@ pipeline {
                 sh 'rm -rf 0812_test branch_all.txt'
                 sh 'git clone https://github.com/lauraanddola/pipeline666.git 0812_test'
                 sh 'git branch -a'
-                sh 'git branch -a > branch_all.txt'
-                sh 'cat branch_all.txt'
+                sh 'git branch -a > ${currentpath}/branch_all.txt'
+                sh 'cat ${currentpath}/branch_all.txt'
                 
-                sh 'filename="branch_all.txt"'
+                sh 'filename="${currentpath}/branch_all.txt"'
                 sh 'prefix_head="remotes/origin/"'
                 sh '''unset branch_array
 

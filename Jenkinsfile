@@ -57,6 +57,8 @@ pwd
                   // rm -rf 0812_test
                    for branch_item in ${branch_array[*]}
                    do
+                        pwd
+                        ls -lrt
                         rm -rf 0812_test
                         git clone https://github.com/lauraanddola/pipeline666.git 0812_test
                         echo "Start to sync $branch_item"

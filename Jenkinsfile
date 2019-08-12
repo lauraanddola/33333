@@ -33,15 +33,17 @@ pipeline {
   
                      prefix_head="remotes/origin/"
                      git branch -a |while read  line; do
-    name="$line"
-    if [[ $line == *$prefix_head* ]]; then 
-      echo "Match is $line"; 
-     substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
-     echo "888: $substr"
-     branch_array+=("$substr:2")
-      
-   fi
-done
+                         name="$line"
+                         if [[ $line == *$prefix_head* ]]; then 
+                             echo "Match is $line"; 
+                             substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
+                              echo "888: $substr"
+                              branch_array+=("$substr:2")
+    
+                              echo "66666: $(substr:2)"
+        
+                          fi
+                      done
              
 
 

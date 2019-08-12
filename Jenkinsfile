@@ -28,7 +28,7 @@ pipeline {
                 sh 'rm -rf 0812_test branch_all.txt'
                 sh 'git clone https://github.com/lauraanddola/pipeline666.git 0812_test'
                 sh 'git branch -a'
-                sh '''branch_array = ( $(git branch -a))
+                sh '''branch_array = $(git branch -a)
                   
                 
                   // filename="${currentpath}/branch_all.txt"

@@ -33,9 +33,9 @@ pipeline {
                 
                 sh 'filename="branch_all.txt"'
                 sh 'prefix_head="remotes/origin/"'
-                sh 'unset branch_array'
+                sh '''unset branch_array
 
-                sh  ' while read -r line; do
+                    while read -r line; do
                         name="$line"
                         #echo "Name read from file - $name"
                         if [[ $line == *$prefix_head* ]]; then 
@@ -52,7 +52,7 @@ pipeline {
                         echo "Start to sync $branch_item"
                     done
 
-                    echo "2222"'
+                    echo "2222" '''
 
                 sayHello("Laura")
                  script {

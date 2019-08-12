@@ -53,14 +53,13 @@ pwd
                         fi
                      done < "$filename"
 
-
+                   declare -a  abc=("linux" "flora" "unixt")  
                    for branch_item in ${branch_array[*]}
                    do
                         pwd
                         ls -lrt
                         i=0
-                        aaa =["111-test", "2222-test", "333-test" ]
-                        git clone https://github.com/lauraanddola/pipeline666.git ${a[i]}
+                        git clone https://github.com/lauraanddola/pipeline666.git ${abc[i]}
                         i = i + 1
                         ls -ltr
                         cd ${a[i]}

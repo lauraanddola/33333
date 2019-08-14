@@ -26,11 +26,13 @@ pipeline {
             steps {
                 sh 'echo "execute say hello script:"'
                 sh 'rm -rf 0812_test branch_all.txt'
-                 git(
-       url: 'https://github.com/lauraanddola/pipeline666.git',
-       credentialsId: 'lauraanddora123',
-       branch: "master"
-    )
+                sh 'mkdir 0812_test
+                    cd 0812_test'
+                git(
+                    url: 'https://github.com/lauraanddola/pipeline666.git',
+                    credentialsId: 'lauraanddora123',
+                    branch: "master"
+                )
                 sh 'git branch -a'
                 sh '''
                      unset branch_array
@@ -58,14 +60,23 @@ pwd
                      done < "$filename"
                    
                    
-
+                    cd ..
                     echo "1111"
 for branch_item in ${branch_array[*]}
 do
   echo "Start to sync $branch_item"
-  
+
+  mkdir $branch_item
+  cd $branch_item
+
   pwd
-  git clone https://github.com/lauraanddola/pipeline666.git $branch_item
+  git(
+                    url: 'https://github.com/lauraanddola/pipeline666.git',
+                    credentialsId: 'lauraanddora123',
+                    branch: "master"
+   )  
+    
+
   cd $branch_item
   pwd
 

@@ -77,13 +77,14 @@ pipeline {
                     cd ..
                   '''
                   
-                  branch_text = branch_from_file.split('\n')
-                  for (branch in branch_text) {
+                  script {
+                    branch_text = branch_from_file.split('\n')
+                    for (branch in branch_text) {
 
                       sh 'echo ${branch}'
                       sh 'echo "aaaaaa"'   
+                    }
                   }
-
 
 sh '''
 for branch_item in ${branch_array[*]}

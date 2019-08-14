@@ -60,11 +60,14 @@ pipeline {
                         echo "888: $substr"
                         branch_array+=("${substr:2}")
                         echo "${substr:2}"  >> file_new
-                        
+                        ls -lrt
+                        pwd
+                        echo "9999999"
                         fi
                      done < "$filename"  '''
                   script{
-                     def  branch_from_file = readFile "branch_new.txt"
+                    env.WORKSPACE = pwd() 
+                    def  branch_from_file = readFile "${env.WORKSPACE}/branch_new.txt"
                      println  "aaaaaa ${branch_from_file}"
                    }                  
                   sh '''

@@ -29,7 +29,7 @@ pipeline {
             }
             steps {
                 sh 'echo "execute say hello script:"'
-                sh 'rm -rf 0812_test branch_all.txt'
+                sh 'rm -rf 0812_test branch_all.txt file_new.txt'
                 sh 'mkdir 0812_test'
                 sh 'cd 0812_test'
                 git(
@@ -59,7 +59,7 @@ pipeline {
                         substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
                         echo "888: $substr"
                         branch_array+=("${substr:2}")
-                        echo "${substr:2}"  > file_new
+                        echo "${substr:2}"  >> file_new
                         
                         fi
                      done < "$filename"  '''

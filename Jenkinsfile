@@ -67,8 +67,10 @@ pipeline {
                      done < "$filename"  '''
                   script{
                     env.WORKSPACE = pwd() 
-                      branch_from_file = readFile "${env.WORKSPACE}/branch_new.txt"
-                     println  "aaaaaa ${branch_from_file}"
+                      for (String each_text : readFile "${env.WORKSPACE}/branch_new.txt".split("\r?\n")) {
+      
+                          println  "aaaaaa ${each_text}"
+                       }
                    }                  
 
                   sh '''
@@ -77,14 +79,6 @@ pipeline {
                     cd ..
                   '''
                   
-                  script {
-                    branch_text = ${branch_from_file}.split('\n')
-                    for (branch in branch_text) {
-
-                      sh 'echo ${branch}'
-                      sh 'echo "aaaaaa"'   
-                    }
-                  }
 
 sh '''
 for branch_item in ${branch_array[*]}

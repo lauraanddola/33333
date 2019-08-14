@@ -104,36 +104,6 @@ pipeline {
                     cd ..
                   '''
                   
-
-sh '''
-for branch_item in ${branch_array[*]}
-do
-  echo "Start to sync $branch_item"
-  pwd
-  rm -rf $branch_item
-  git clone https://github.com/lauraanddola/pipeline666.git $branch_item
-  cd $branch_item
-  pwd
-
-  git checkout $branch_item
-  git fetch --tags
-  git tag
-  git branch -a
-  git remote -v
-  git remote rm origin
-  git remote add origin https://github.com/lauraanddola/pipeline0812.git
-  git remote -v
-  git push origin --all
-  git push --tags
-  echo "End of sync $branch_item"
-  cd ..
-  pwd
-  echo "3333"
-done
-                 
-
-                    echo "2222" '''
-                println "6666666 ${branch_abc}"
                 sayHello("Laura")
                  script {
 

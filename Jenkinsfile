@@ -6,7 +6,7 @@ node {
    currentpath = currentpath.substring(0, a) ///Users/i356558/.jenkins/workspace
    datas = readYaml file: "${currentpath}/gen-cmdbserver.yml"
    //mapped to /Users/i356558/.jenkins/workspace/gen-cmdbserver.yml
-   branch_abc =[]
+   branch_abc =['a', 'b', 'c']
 }
 pipeline {
     agent any
@@ -40,7 +40,7 @@ pipeline {
                 sh 'git branch -a'
                 sh '''
                      unset branch_array
-pwd  
+                     pwd
                      prefix_head="remotes/origin/"
                      git branch -a > branch_all.txt
                      cat branch_all.txt
@@ -59,7 +59,7 @@ pwd
                         substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
                         echo "888: $substr"
                         branch_array+=("${substr:2}")
-                        ${branch_abc} +=  ("${substr:2}")
+                        //${branch_abc} +=  ("${substr:2}")
         
                         fi
                      done < "$filename"

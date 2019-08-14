@@ -7,6 +7,7 @@ node {
    datas = readYaml file: "${currentpath}/gen-cmdbserver.yml"
    //mapped to /Users/i356558/.jenkins/workspace/gen-cmdbserver.yml
    branch_abc =['a', 'b', 'c']
+   def  branch_from_file
 }
 pipeline {
     agent any
@@ -59,17 +60,27 @@ pipeline {
                         substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
                         echo "888: $substr"
                         branch_array+=("${substr:2}")
-                        echo "${substr:2}"  >> file_new
-                        
+                        echo "${substr:2}"  >> "${file_new}"
+                        ls -lrt
+                        pwd
                         fi
                      done < "$filename"  '''
-                  
+                  script{
+                    env.WORKSPACE = pwd() 
+                      for (String each_text : readFile('branch_new.txt').split("\r?\n")) {
+      
+                          println  "aaaaaa ${each_text}"
+                       }
+                   }                  
+
                   sh '''
-                    cat file_new
-                    echo "88888888888888"
+                    cat ${file_new}
                    
                     cd ..
-                    echo "1111"
+                  '''
+                  
+
+sh '''
 for branch_item in ${branch_array[*]}
 do
   echo "Start to sync $branch_item"

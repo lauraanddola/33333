@@ -67,9 +67,34 @@ pipeline {
                      done < "$filename"  '''
                   script{
                     env.WORKSPACE = pwd() 
-                      for (String each_text : readFile('branch_new.txt').split("\r?\n")) {
+                      for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
       
-                          println  "aaaaaa ${each_text}"
+                          println  "Start to sync ${branch_item}"
+                          sh ' pwd'
+                          sh 'rm -rf ${branch_item}'
+                          git(
+                              url: 'https://github.com/lauraanddola/pipeline666.git',
+                              credentialsId: 'lauraanddora123',
+                              branch: "master"
+                           )
+                          sh 'cd ${branch_item}'
+                          sh  'pwd'
+
+                          sh  'git checkout ${branch_item}'
+                          sh  'git fetch --tags'
+                          sh  'git tag'
+                          sh  'git branch -a'
+                          sh  'git remote -v'
+                          sh  'git remote rm origin'
+                          sh  'git remote add origin https://github.com/lauraanddola/pipeline0812.git'
+                          sh  'git remote -v'
+                          sh  'git push origin --all'
+                          sh  'git push --tags'
+                          sh  'echo "End of sync $branch_item"
+                          sh  'cd ..'
+                          sh  ' pwd'
+                          sh  'echo "3333"'
+
                        }
                    }                  
 

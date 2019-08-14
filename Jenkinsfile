@@ -66,18 +66,11 @@ for branch_item in ${branch_array[*]}
 do
   echo "Start to sync $branch_item"
 
-  mkdir $branch_item
-  cd $branch_item
 
   pwd
-  git(
-                    url: 'https://github.com/lauraanddola/pipeline666.git',
-                    credentialsId: 'lauraanddora123',
-                    branch: "master"
-   )  
+  git clone https://lauraanddora123@github.com/lauraanddola/pipeline666.git $branch_item
     
 
-  cd $branch_item
   pwd
 
   git checkout $branch_item

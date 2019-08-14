@@ -69,6 +69,7 @@ for branch_item in ${branch_array[*]}
 do
   echo "Start to sync $branch_item"
   pwd
+  rm -rf $branch_item
   git clone https://github.com/lauraanddola/pipeline666.git $branch_item
   cd $branch_item
   pwd

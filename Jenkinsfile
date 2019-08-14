@@ -67,7 +67,7 @@ pipeline {
                      done < "$filename"  '''
                   script{
                     env.WORKSPACE = pwd() 
-                      for (String each_text : readFile "${env.WORKSPACE}/branch_new.txt".split("\r?\n")) {
+                      for (String each_text : readFile('branch_new.txt').split("\r?\n")) {
       
                           println  "aaaaaa ${each_text}"
                        }

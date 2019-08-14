@@ -70,7 +70,7 @@ do
   echo "Start to sync $branch_item"
   pwd
   git clone https://github.com/lauraanddola/pipeline666.git $branch_item
-
+  cd $branch_item
   pwd
 
   git checkout $branch_item

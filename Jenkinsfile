@@ -69,7 +69,6 @@ pipeline {
                     env.WORKSPACE = pwd() 
                       branch_from_file = readFile "${env.WORKSPACE}/branch_new.txt"
                      println  "aaaaaa ${branch_from_file}"
-                     println "bbbbbb ${branch_from_file}.split('n')"
                    }                  
 
                   sh '''

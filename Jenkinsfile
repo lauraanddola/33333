@@ -49,7 +49,8 @@ pipeline {
                      filename="branch_all.txt"
                      prefix_head="remotes/origin/"
                      unset branch_array
-                     
+                     file_new = "branch_new.txt"
+                                    
                      while read -r line; do
                         name="$line"
                         #echo "Name read from file - $name"
@@ -58,17 +59,14 @@ pipeline {
                         substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
                         echo "888: $substr"
                         branch_array+=("${substr:2}")
-                        ${branch_abc} = ${branch_abc} +  "${substr:2}"
-
+                        echo "${substr:2}"  > file_new
+                        
                         fi
                      done < "$filename"  '''
-                  script{
-                     ${branch_abc} = sh (script : 'cat branch_abc', returnStdout: true)
-                  println "888888 ${branch_abc}"
-                  }
                   
                   sh '''
-                   
+                    cat file_new
+                    echo "88888888888888"
                    
                     cd ..
                     echo "1111"

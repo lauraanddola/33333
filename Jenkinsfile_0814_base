@@ -26,11 +26,7 @@ pipeline {
             steps {
                 sh 'echo "execute say hello script:"'
                 sh 'rm -rf 0812_test branch_all.txt'
-                 git(
-       url: 'https://github.com/lauraanddola/pipeline666.git',
-       credentialsId: 'lauraanddora123',
-       branch: "master"
-    )
+                sh 'git clone https://github.com/lauraanddola/pipeline666.git 0812_test'
                 sh 'git branch -a'
                 sh '''
                      unset branch_array

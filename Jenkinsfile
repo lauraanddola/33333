@@ -62,8 +62,11 @@ pipeline {
 
                         fi
                      done < "$filename"  '''
-                  ${branch_abc} = sh (script : 'cat branch_array', returnStdout: true)
+                  script{
+                     ${branch_abc} = sh (script : 'cat branch_abc', returnStdout: true)
                   println "888888 ${branch_abc}"
+                  }
+                  
                   sh '''
                    
                    

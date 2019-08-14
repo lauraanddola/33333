@@ -71,16 +71,16 @@ pipeline {
       
                           println  "Start to sync ${branch_item}"
                           sh ' pwd'
-                          sh 'rm -rf ${branch_item}'
+                          sh "rm -rf ${branch_item}"
                           git(
                               url: 'https://github.com/lauraanddola/pipeline666.git',
                               credentialsId: 'lauraanddora123',
                               branch: "${branch_item}"
                            )
-                          sh 'cd ${branch_item}'
+                          sh "cd ${branch_item}"
                           sh  'pwd'
 
-                          sh  'git checkout ${branch_item}'
+                          sh  "git checkout ${branch_item}"
                           sh  'git fetch --tags'
                           sh  'git tag'
                           sh  'git branch -a'
@@ -90,7 +90,7 @@ pipeline {
                           sh  'git remote -v'
                           sh  'git push origin --all'
                           sh  'git push --tags'
-                          sh  'echo "End of sync $branch_item"'
+                          sh  '''echo "End of sync ${branch_item}"'''
                           sh  'cd ..'
                           sh  ' pwd'
                           sh  'echo "3333"'

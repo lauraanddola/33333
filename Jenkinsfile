@@ -72,12 +72,13 @@ pipeline {
                           println  "Start to sync ${branch_item}"
                           sh ' pwd'
                           sh "rm -rf ${branch_item}"
+                          sh "mkdir ${branch_item}"
+                          sh "cd ${branch_item}"
                           git(
                               url: 'https://github.com/lauraanddola/pipeline666.git',
                               credentialsId: 'lauraanddora123',
                               branch: "${branch_item}"
                            )
-                          sh "cd ${branch_item}"
                           sh  'pwd'
 
                           sh  "git checkout ${branch_item}"

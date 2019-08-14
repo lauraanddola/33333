@@ -75,7 +75,7 @@ pipeline {
                           git(
                               url: 'https://github.com/lauraanddola/pipeline666.git',
                               credentialsId: 'lauraanddora123',
-                              branch: "master"
+                              branch: "${branch_item}"
                            )
                           sh 'cd ${branch_item}'
                           sh  'pwd'

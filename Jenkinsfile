@@ -26,8 +26,8 @@ pipeline {
             steps {
                 sh 'echo "execute say hello script:"'
                 sh 'rm -rf 0812_test branch_all.txt'
-                sh 'mkdir 0812_test
-                    cd 0812_test'
+                sh 'mkdir 0812_test'
+                sh 'cd 0812_test'
                 git(
                     url: 'https://github.com/lauraanddola/pipeline666.git',
                     credentialsId: 'lauraanddora123',

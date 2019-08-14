@@ -49,7 +49,7 @@ pipeline {
                      filename="branch_all.txt"
                      prefix_head="remotes/origin/"
                      unset branch_array
-                     file_new = "branch_new.txt"
+                     file_new="branch_new.txt"
                                     
                      while read -r line; do
                         name="$line"

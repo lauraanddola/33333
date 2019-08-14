@@ -71,7 +71,7 @@ pipeline {
                      println  "aaaaaa ${branch_from_file}"
                    }                  
                   sh '''
-                    cat file_new
+                    cat ${file_new}
                     echo "88888888888888"
                    
                     cd ..

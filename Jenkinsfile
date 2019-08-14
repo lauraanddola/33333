@@ -63,7 +63,10 @@ pipeline {
                         
                         fi
                      done < "$filename"  '''
-                  
+                  script{
+                     def  branch_from_file = readFile "branch_new.txt"
+                     println  "aaaaaa ${branch_from_file}"
+                   }                  
                   sh '''
                     cat file_new
                     echo "88888888888888"

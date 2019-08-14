@@ -90,7 +90,7 @@ pipeline {
                           sh  'git remote -v'
                           sh  'git push origin --all'
                           sh  'git push --tags'
-                          sh  'echo "End of sync $branch_item"
+                          sh  'echo "End of sync $branch_item"'
                           sh  'cd ..'
                           sh  ' pwd'
                           sh  'echo "3333"'

@@ -40,7 +40,7 @@ pipeline {
                 sh 'cd 0812_test'
                 git(
                     //url: "${repo_base[0]}",
-                    url: "https://github.com/lauraanddola/helmRepo.git"
+                    url: "https://github.com/lauraanddola/helmRepo.git",
                     credentialsId: 'laura_test6',
                     branch: "master"
                 )

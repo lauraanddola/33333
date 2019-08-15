@@ -12,6 +12,9 @@ node {
 }
 pipeline {
     agent any
+    environment {
+        USER_CREDENTIALS = credentials('laura_test6')
+    }
 
     parameters {
           booleanParam(defaultValue: true, description: '', name: 'userFlag')
@@ -27,6 +30,9 @@ pipeline {
 
         stage('test') {
             steps {
+                sh "echo $$USER_CREDENTIALS_USR"
+                sh "echo $USER_CREDENTIALS_PSW"
+                
                 sh 'echo "execute say hello script:"'
                 sh 'rm -rf 0812_test branch_all.txt file_new.txt'
                 sh 'mkdir 0812_test'

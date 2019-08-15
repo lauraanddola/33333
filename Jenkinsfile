@@ -145,8 +145,7 @@ pipeline {
 }
 
 def checkRepExisted(){
-withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')])
-                          {
+  withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')]) {
                             sh("echo $SSH_KEY_FOR_ABC")
                             sh("rm -rf repo_result.txt")
                             sh("set -e")
@@ -162,6 +161,7 @@ withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable
                                     
                               }
                             }
+  }
 }
 def sayHello(String name = 'human') {
     echo "Hello, ${name}."

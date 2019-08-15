@@ -1,4 +1,4 @@
-`node {
+node {
 
   // customWorkspace '/Users/i356558/jenkins_mac_666'
    currentpath = pwd() ///Users/i356558/.jenkins/workspace/laura666

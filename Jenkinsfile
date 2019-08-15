@@ -91,10 +91,8 @@ pipeline {
                             sh("set -e")
                             sh("EXIT_CODE=0")
                             sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git || EXIT_CODE=$?')
-                            sh("set -e")
                             sh('''if [[ $EXIT_CODE -ne "0"]];then
                                     echo "not found" > repo_result.txt
-                                    exit 0
                                 fi''')
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')

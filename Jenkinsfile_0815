@@ -89,8 +89,10 @@ pipeline {
                           sh  'git remote rm origin'
                           sh  'git remote add origin https://github.com/lauraanddola/pipeline0812.git'
                           sh  'git remote -v'
-                          sh  'git push origin --all'
-                          sh  'git push --tags'
+                          withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY')]) 
+                          { sh("git push origin --all")
+                            sh("git push --tags") }
+
                           sh  '''echo "End of sync ${branch_item}"'''
                           sh  'cd ..'
                           sh  ' pwd'

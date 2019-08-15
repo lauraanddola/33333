@@ -40,7 +40,6 @@ pipeline {
                 )
                 sh 'git branch -a'
                 sh '''
-                     unset branch_array
                      pwd
                      prefix_head="remotes/origin/"
                      git branch -a > branch_all.txt
@@ -49,7 +48,6 @@ pipeline {
 
                      filename="branch_all.txt"
                      prefix_head="remotes/origin/"
-                     unset branch_array
                      file_new="branch_new.txt"
                                     
                      while read -r line; do
@@ -58,8 +56,7 @@ pipeline {
                         if [[ $line == *$prefix_head* ]]; then 
                         echo "Match is $line"; 
                         substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
-                        echo "888: $substr"
-                        branch_array+=("${substr:2}")
+                        echo "888: ${substr:15}"
                         echo "${substr:2}"  >> "${file_new}"
                         ls -lrt
                         pwd
@@ -76,7 +73,7 @@ pipeline {
                           sh "cd ${branch_item}"
                           git(
                               url: 'https://github.com/lauraanddola/pipeline666.git',
-                              credentialsId: 'lauraanddora123',
+                              credentialsId: 'laur_test6',
                               branch: "${branch_item}"
                            )
                           sh  'pwd'

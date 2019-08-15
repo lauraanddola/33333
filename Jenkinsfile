@@ -95,7 +95,7 @@ pipeline {
                           sh  'git remote -v'
 
                             sh("git push origin --all")
-                            sh("git push --tags") }
+                            sh("git push --tags")
 
                           sh  '''echo "End of sync ${branch_item}"'''
                           sh  'cd ..'

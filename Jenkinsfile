@@ -96,6 +96,7 @@ pipeline {
                             println "repo result is : ${repo_isFound}"
                             if (repo_isFound.contains("not found")) {
                                println "666666 repo not found"
+                               curl -H 'Authorization: token laura_test6' --data '{"name":"1111"}' https://api.github.com/user/repos
                             }
                             sh("git push origin --all")
                             sh("git push --tags") }

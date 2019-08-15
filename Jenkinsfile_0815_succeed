@@ -39,8 +39,8 @@ pipeline {
                 sh 'mkdir 0812_test&&chmod 777 0812_test'
                 sh 'cd 0812_test'
                 git(
-                    url: "${repo_base[0]}",
-
+                    //url: "${repo_base[0]}",
+                    url: "https://github.com/lauraanddola/helmRepo.git",
                     credentialsId: 'laura_test6',
                     branch: "master"
                 )
@@ -81,7 +81,7 @@ pipeline {
                           sh 'pwd'
                           sh "ls -lrt"
                           git(
-                              url: 'https://github.com/lauraanddola/pipeline666.git',
+                              url: 'https://github.com/lauraanddola/helmRepo.git',
                               credentialsId: 'laura_test6',
                               branch: "${branch_item}"
                            )
@@ -134,7 +134,7 @@ def checkRepExisted(){
                             sh("rm -rf repo_result.txt")
                             sh("set -e")
                             sh("EXIT_CODE=0")
-                            sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git &>repo_result.txt || EXIT_CODE=$?')
+                            sh('git ls-remote https://github.com/lauraanddola/22222.git &>repo_result.txt || EXIT_CODE=$?')
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')
                             println "repo result is : ${repo_isFound}"

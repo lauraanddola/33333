@@ -30,8 +30,8 @@ pipeline {
 
         stage('test') {
             steps {
+                sh "echo 1111111"
                 sh "echo $USER_CREDENTIALS_USR"
-                sh "echo $USER_CREDENTIALS_PSW"
                 
                 sh 'echo "execute say hello script:"'
                 sh 'rm -rf 0812_test branch_all.txt file_new.txt'
@@ -91,8 +91,9 @@ pipeline {
                           sh  'git remote rm origin'
                           sh  'git remote add origin https://github.com/lauraanddola/pipeline0813.git'
                           sh  'git remote -v'
-                          withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY')]) 
+                          withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')]) 
                           { 
+                            sh("echo $SSH_KEY_FOR_ABC")
                             sh("rm -rf repo_result.txt")
                             sh("set -e")
                             sh("EXIT_CODE=0")
@@ -102,7 +103,7 @@ pipeline {
                             println "repo result is : ${repo_isFound}"
                             if (repo_isFound.contains("not found")) {
                                println "666666 repo not found"
-                               sh('''curl -H 'Authorization: token laura_test6' --data '{"name":"1111"}' https://api.github.com/user/repos''')
+                               sh('''curl -H "Authorization: token ${SSH_KEY_FOR_ABC}" --data '{"name":"1111"}' https://api.github.com/user/repos''')
                             }
                             sh("git push origin --all")
                             sh("git push --tags") }

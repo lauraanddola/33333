@@ -91,10 +91,11 @@ pipeline {
                             sh("set -e")
                             sh("EXIT_CODE=0")
                             sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git || EXIT_CODE=$?')
+                            sh('echo $EXIT_CODE > repo_result.txt')
                             sh('''if [ $EXIT_CODE -eq 0 ];then
                                       echo "repo already existed"
                                 else
-                                      echo "not found" > repo_result.txt
+                                      echo "not found" >> repo_result.txt
                                 fi''')
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')

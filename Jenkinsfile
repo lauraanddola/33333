@@ -170,8 +170,7 @@ sh('git push -u origin master')
                              }
  
       
-                            }
-                            sh("cd ..")                       
+                            sh("cd ..")}                       
 }
 
 def sayHello(String name = 'human') {

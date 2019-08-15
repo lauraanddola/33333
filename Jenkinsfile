@@ -87,7 +87,7 @@ pipeline {
                           sh  'git remote -v'
                           withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY')]) 
                           { 
-                            sh("git ls-remote https://github.com/lauraanddola/pipeline0813.git")
+                            sh("if [[ $(git ls-remote https://github.com/lauraanddola/pipeline0813.git) == *remote: Repository not found* ]]; then echo "not found repo"；fi")
                            
                             sh("git push origin --all")
                             sh("git push --tags") }

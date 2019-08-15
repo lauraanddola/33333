@@ -90,8 +90,7 @@ pipeline {
                             sh("rm -rf repo_result.txt")
                             sh("set -e")
                             sh("EXIT_CODE=0")
-                            sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git || EXIT_CODE=$?')
-                            sh('echo $EXIT_CODE > repo_result.txt')
+                            sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git &>repo_result.txt || EXIT_CODE=$?')
                             sh('''if [ $EXIT_CODE -eq 0 ];then
                                       echo "repo already existed"
                                 else

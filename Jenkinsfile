@@ -30,7 +30,7 @@ pipeline {
 
         stage('test') {
             steps {
-                sh "echo $$USER_CREDENTIALS_USR"
+                sh "echo $USER_CREDENTIALS_USR"
                 sh "echo $USER_CREDENTIALS_PSW"
                 
                 sh 'echo "execute say hello script:"'

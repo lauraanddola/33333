@@ -89,11 +89,10 @@ pipeline {
                           { 
                             sh("rm -rf repo_result.txt")
                             sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git')
-                            sh('if [ $? -ne "0"];
-                                then
+                            sh('''if [[ $? -ne "0"]];then
                                     echo "not found" > repo_result.txt
                                     exit 0
-                                fi')
+                                fi''')
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')
                             println "repo result is : ${repo_isFound}"

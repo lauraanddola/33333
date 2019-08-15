@@ -159,7 +159,7 @@ def checkRepExisted(){
                                withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
                                     sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"22222"}' https://api.github.com/user/repos''')
 sh("ls -lrt")
-sh("mkdir reo_temp")
+sh("mkdir repo_stemp")
 sh("ls -lrt")
 sh("cd repo_temp")
 sh('git init')

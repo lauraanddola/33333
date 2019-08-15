@@ -102,7 +102,6 @@ pipeline {
                           sh  ' pwd'
                           sh  'echo "3333"'
                          }
-                       }
                    }                  
 
                   sh '''

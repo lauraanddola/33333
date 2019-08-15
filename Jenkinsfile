@@ -76,8 +76,10 @@ pipeline {
                           sh 'pwd'
                           sh "rm -rf ${branch_item}"
                           sh "mkdir ${branch_item}"
+                          sh "ls -lrt"
                           sh "cd ${branch_item}"
                           sh 'pwd'
+                          sh "ls -lrt"
                           git(
                               url: 'https://github.com/lauraanddola/pipeline666.git',
                               credentialsId: 'laura_test6',

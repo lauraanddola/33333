@@ -36,7 +36,7 @@ pipeline {
                 
                 sh 'echo "execute say hello script:"'
                 sh 'rm -rf 0812_test branch_all.txt file_new.txt'
-                sh 'mkdir 0812_test'
+                sh 'mkdir 0812_test&&chmod 777 0812_test'
                 sh 'cd 0812_test'
                 git(
                     url: "${repo_base[0]}",

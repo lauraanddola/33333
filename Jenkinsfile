@@ -30,7 +30,7 @@ pipeline {
 
         stage('test') {
             steps {
-                checkRemoteRepoExisted()
+                checkRepExisted()
                 sh "echo 1111111"
                 sh "echo $USER_CREDENTIALS_USR"
                 
@@ -98,14 +98,15 @@ pipeline {
                             sh("rm -rf repo_result.txt")
                             sh("set -e")
                             sh("EXIT_CODE=0")
-                            sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git &>repo_result.txt || EXIT_CODE=$?')
+                            sh('git ls-remote https://github.com/lauraanddola/2222.git &>repo_result.txt || EXIT_CODE=$?')
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')
                             println "repo result is : ${repo_isFound}"
                             if (repo_isFound.contains("not found")) {
-                               println "555555 repo not found"
+                               println "88888 repo not found"
                                withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
-                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"1111"}' https://api.github.com/user/repos''')
+                                    sh('''echo "hihihi"''')
+                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"2222"}' https://api.github.com/user/repos''')
                               }
                             }
 
@@ -143,12 +144,10 @@ pipeline {
     }
 }
 
-def checkRemoteRepoExisted(){
-    withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')])
+def checkRepExisted(){
+withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')])
                           {
                             sh("echo $SSH_KEY_FOR_ABC")
-                            sh("mkdir test_repo")
-                            sh("cd test_repo")
                             sh("rm -rf repo_result.txt")
                             sh("set -e")
                             sh("EXIT_CODE=0")
@@ -159,20 +158,11 @@ def checkRemoteRepoExisted(){
                             if (repo_isFound.contains("not found")) {
                                println "666666 repo not found"
                                withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
-                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"2222"}' https://api.github.com/user/repos''')
-                                    sh('touch REME.md') 
-                                    sh('git init')
-                           sh('git add README.md')
-sh('git commit -m "first commit"')
-sh('git remote add origin https://github.com/lauraanddola/2222.git')
-sh('git push -u origin master')
-
-                             }
- 
-      
-                            sh("cd ..")}                       
+                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"22222"}' https://api.github.com/user/repos''')
+                                    
+                              }
+                            }
 }
-
 def sayHello(String name = 'human') {
     echo "Hello, ${name}."
 }

@@ -77,7 +77,7 @@ pipeline {
                           sh "rm -rf ${branch_item}"
                           sh "mkdir ${branch_item}"
                           sh "ls -lrt"
-                          sh "cd ${branch_item}"
+                          sh '''cd ${branch_item}'''
                           sh 'pwd'
                           sh "ls -lrt"
                           git(

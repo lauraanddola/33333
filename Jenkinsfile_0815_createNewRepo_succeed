@@ -30,7 +30,8 @@ pipeline {
 
         stage('test') {
             steps {
-                sh "echo 1111111"
+                checkRepExisted()
+                sh "echo hihihi1111111"
                 sh "echo $USER_CREDENTIALS_USR"
                 
                 sh 'echo "execute say hello script:"'
@@ -75,10 +76,13 @@ pipeline {
                           sh 'pwd'
                           sh "rm -rf ${branch_item}"
                           sh "mkdir ${branch_item}"
-                          sh "cd ${branch_item}"
+                          sh "ls -lrt"
+                          sh '''cd ${branch_item}'''
+                          sh 'pwd'
+                          sh "ls -lrt"
                           git(
                               url: 'https://github.com/lauraanddola/pipeline666.git',
-                              credentialsId: 'laur_test6',
+                              credentialsId: 'laura_test6',
                               branch: "${branch_item}"
                            )
                           sh  'pwd'
@@ -89,34 +93,17 @@ pipeline {
                           sh  'git branch -a'
                           sh  'git remote -v'
                           sh  'git remote rm origin'
-                          sh  'git remote add origin https://github.com/lauraanddola/pipeline0813.git'
+                          sh  'git remote add origin https://github.com/lauraanddola/22222.git'
                           sh  'git remote -v'
-                          withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')]) 
-                          { 
-                            sh("echo $SSH_KEY_FOR_ABC")
-                            sh("rm -rf repo_result.txt")
-                            sh("set -e")
-                            sh("EXIT_CODE=0")
-                            sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git &>repo_result.txt || EXIT_CODE=$?')
-                            sh("cat repo_result.txt")
-                            String repo_isFound= readFile('repo_result.txt')
-                            println "repo result is : ${repo_isFound}"
-                            if (repo_isFound.contains("not found")) {
-                               println "666666 repo not found"
-                               withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
-                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"1111"}' https://api.github.com/user/repos''')
-                              }
-                            }
 
                             sh("git push origin --all")
-                            sh("git push --tags") }
+                            sh("git push --tags")
 
                           sh  '''echo "End of sync ${branch_item}"'''
                           sh  'cd ..'
                           sh  ' pwd'
                           sh  'echo "3333"'
-
-                       }
+                         }
                    }                  
 
                   sh '''
@@ -142,6 +129,40 @@ pipeline {
     }
 }
 
+def checkRepExisted(){
+  withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')]) {
+                            sh("echo $SSH_KEY_FOR_ABC")
+                            sh("rm -rf repo_result.txt")
+                            sh("set -e")
+                            sh("EXIT_CODE=0")
+                            sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git &>repo_result.txt || EXIT_CODE=$?')
+                            sh("cat repo_result.txt")
+                            String repo_isFound= readFile('repo_result.txt')
+                            println "repo result is : ${repo_isFound}"
+                            if (repo_isFound.contains("not found")) {
+                               println "666666 repo not found"
+                               withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
+                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"22222"}' https://api.github.com/user/repos''')
+sh("ls -lrt")
+sh("mkdir repo_temp")
+sh("ls -lrt")
+sh("cd repo_temp")
+sh("git branch")
+sh('git init')
+sh('git checkout master')
+sh('touch README.md')
+sh('git add .')
+sh('git commit -m "first commit"')
+sh('git remote -v')
+sh('git remote rm origin')
+sh('git remote add origin https://github.com/lauraanddola/22222.git')
+sh('git push origin master --force')
+sh('cd ..')   
+                                 
+                              }
+                            }
+  }
+}
 def sayHello(String name = 'human') {
     echo "Hello, ${name}."
 }

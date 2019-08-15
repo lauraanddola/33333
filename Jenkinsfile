@@ -169,7 +169,7 @@ sh('git commit -m "first commit"')
 sh('git remote -v')
 sh('git remote rm origin')
 sh('git remote add origin https://github.com/lauraanddola/2222.git')
-sh('git push -u origin master')
+sh('git push origin --all')
 sh('cd ..')   
                                  
                               }

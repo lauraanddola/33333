@@ -77,9 +77,10 @@ pipeline {
                           sh "rm -rf ${branch_item}"
                           sh "mkdir ${branch_item}"
                           sh "cd ${branch_item}"
+                          sh 'pwd'
                           git(
                               url: 'https://github.com/lauraanddola/pipeline666.git',
-                              credentialsId: 'laur_test6',
+                              credentialsId: 'laura_test6',
                               branch: "${branch_item}"
                            )
                           sh  'pwd'
@@ -92,23 +93,6 @@ pipeline {
                           sh  'git remote rm origin'
                           sh  'git remote add origin https://github.com/lauraanddola/22222.git'
                           sh  'git remote -v'
-                          withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')]) 
-                          { 
-                            sh("echo $SSH_KEY_FOR_ABC")
-                            sh("rm -rf repo_result.txt")
-                            sh("set -e")
-                            sh("EXIT_CODE=0")
-                            sh('git ls-remote https://github.com/lauraanddola/22222.git &>repo_result.txt || EXIT_CODE=$?')
-                            sh("cat repo_result.txt")
-                            String repo_isFound= readFile('repo_result.txt')
-                            println "repo result is : ${repo_isFound}"
-                            if (repo_isFound.contains("not found")) {
-                               println "88888 repo not found"
-                               withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
-                                    sh('''echo "hihihi"''')
-                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"2222"}' https://api.github.com/user/repos''')
-                              }
-                            }
 
                             sh("git push origin --all")
                             sh("git push --tags") }

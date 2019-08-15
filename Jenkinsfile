@@ -103,8 +103,11 @@ pipeline {
                             println "repo result is : ${repo_isFound}"
                             if (repo_isFound.contains("not found")) {
                                println "666666 repo not found"
-                               sh('''curl -H "Authorization: token ${SSH_KEY_FOR_ABC}" --data '{"name":"1111"}' https://api.github.com/user/repos''')
+                               withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
+                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"1111"}' https://api.github.com/user/repos''')
+                              }
                             }
+
                             sh("git push origin --all")
                             sh("git push --tags") }
 

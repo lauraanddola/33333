@@ -35,7 +35,7 @@ pipeline {
                 sh 'cd 0812_test'
                 git(
                     url: 'https://github.com/lauraanddola/pipeline666.git',
-                    credentialsId: 'lauraanddora123',
+                    credentialsId: 'laura_test6',
                     branch: "master"
                 )
                 sh 'git branch -a'

@@ -94,7 +94,7 @@ pipeline {
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')
                             println "repo result is : ${repo_isFound}"
-                            if (repo_isFoun.contains("not found")) {
+                            if (repo_isFound.contains("not found")) {
                                println "666666 repo not found"
                             }
                             sh("git push origin --all")

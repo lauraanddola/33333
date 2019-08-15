@@ -90,7 +90,7 @@ pipeline {
                           sh  'git branch -a'
                           sh  'git remote -v'
                           sh  'git remote rm origin'
-                          sh  'git remote add origin https://github.com/lauraanddola/pipeline0813.git'
+                          sh  'git remote add origin https://github.com/lauraanddola/22222.git'
                           sh  'git remote -v'
                           withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')]) 
                           { 
@@ -98,7 +98,7 @@ pipeline {
                             sh("rm -rf repo_result.txt")
                             sh("set -e")
                             sh("EXIT_CODE=0")
-                            sh('git ls-remote https://github.com/lauraanddola/2222.git &>repo_result.txt || EXIT_CODE=$?')
+                            sh('git ls-remote https://github.com/lauraanddola/22222.git &>repo_result.txt || EXIT_CODE=$?')
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')
                             println "repo result is : ${repo_isFound}"
@@ -170,7 +170,7 @@ sh('git add .')
 sh('git commit -m "first commit"')
 sh('git remote -v')
 sh('git remote rm origin')
-sh('git remote add origin https://github.com/lauraanddola/222222.git')
+sh('git remote add origin https://github.com/lauraanddola/22222.git')
 sh('git push origin master --force')
 sh('cd ..')   
                                  

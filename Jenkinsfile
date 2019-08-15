@@ -95,7 +95,7 @@ pipeline {
                           sh  'git remote rm origin'
                           sh  'git remote add origin https://github.com/lauraanddola/22222.git'
                           sh  'git remote -v'
-                         
+                          sh  'git pull'                         
                             sh("git push origin --all")
                             sh("git push --tags")
 

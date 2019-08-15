@@ -7,6 +7,7 @@ node {
    datas = readYaml file: "${currentpath}/gen-cmdbserver.yml"
    //mapped to /Users/i356558/.jenkins/workspace/gen-cmdbserver.yml
    branch_abc =['a', 'b', 'c']
+   repo_base=['https://github.com/lauraanddola/pipeline666.git']
    def  branch_from_file
 }
 pipeline {
@@ -25,16 +26,14 @@ pipeline {
     stages {
 
         stage('test') {
-            environment { 
-                GIT_AUTH = credentials('lauraanddora123') 
-            }
             steps {
                 sh 'echo "execute say hello script:"'
                 sh 'rm -rf 0812_test branch_all.txt file_new.txt'
                 sh 'mkdir 0812_test'
                 sh 'cd 0812_test'
                 git(
-                    url: 'https://github.com/lauraanddola/pipeline666.git',
+                    url: "${repo_base[0]}",
+
                     credentialsId: 'laura_test6',
                     branch: "master"
                 )
@@ -67,7 +66,7 @@ pipeline {
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
       
                           println  "Start to sync ${branch_item}"
-                          sh ' pwd'
+                          sh 'pwd'
                           sh "rm -rf ${branch_item}"
                           sh "mkdir ${branch_item}"
                           sh "cd ${branch_item}"
@@ -84,7 +83,7 @@ pipeline {
                           sh  'git branch -a'
                           sh  'git remote -v'
                           sh  'git remote rm origin'
-                          sh  'git remote add origin https://github.com/lauraanddola/pipeline0812.git'
+                          sh  'git remote add origin https://github.com/lauraanddola/pipeline0813.git'
                           sh  'git remote -v'
                           withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY')]) 
                           { sh("git push origin --all")

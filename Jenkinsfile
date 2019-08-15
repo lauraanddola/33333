@@ -158,7 +158,13 @@ def checkRepExisted(){
                                println "666666 repo not found"
                                withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
                                     sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"22222"}' https://api.github.com/user/repos''')
-                                    
+sh('git init')
+sh('git add README.md')
+sh('git commit -m "first commit"')
+sh('git remote add origin https://github.com/lauraanddola/2222.git')
+sh('git push -u origin master')
+   
+                                 
                               }
                             }
   }

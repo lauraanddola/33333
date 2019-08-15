@@ -88,10 +88,11 @@ pipeline {
                           withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY')]) 
                           { 
                             sh("rm -rf repo_result.txt")
-                            sh("set +e")
-                            sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git')
                             sh("set -e")
-                            sh('''if [[ $? -ne "0"]];then
+                            sh("EXIT_CODE=0")
+                            sh('git ls-remote https://github.com/lauraanddola/pipeline0813.git || EXIT_CODE=$?')
+                            sh("set -e")
+                            sh('''if [[ $EXIT_CODE -ne "0"]];then
                                     echo "not found" > repo_result.txt
                                     exit 0
                                 fi''')

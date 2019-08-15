@@ -30,7 +30,7 @@ pipeline {
 
         stage('test') {
             steps {
-                checkRepExisted()
+                //checkRepExisted()
                 sh "echo hihihi1111111"
                 sh "echo $USER_CREDENTIALS_USR"
                 

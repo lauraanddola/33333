@@ -31,7 +31,7 @@ pipeline {
         stage('test') {
             steps {
                 checkRepExisted()
-                sh "echo 1111111"
+                sh "echo hihihi1111111"
                 sh "echo $USER_CREDENTIALS_USR"
                 
                 sh 'echo "execute say hello script:"'
@@ -165,7 +165,7 @@ sh("cd repo_temp")
 sh('git init')
 sh('git add .')
 sh('git commit -m "first commit"')
-sh('git removt -v')
+sh('git remote -v')
 //sh('git remote add origin https://github.com/lauraanddola/2222.git')
 sh('git push -u origin master')
 sh('cd ..')   

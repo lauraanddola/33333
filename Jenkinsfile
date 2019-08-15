@@ -95,7 +95,7 @@ pipeline {
                           sh  'git remote rm origin'
                           sh  'git remote add origin https://github.com/lauraanddola/22222.git'
                           sh  'git remote -v'
-                          sh  "git push origin --all"                         
+                          sh  "git push origin ${branch_item} --force"                         
                           sh  "git push --tags"
 
                           sh  '''echo "End of sync ${branch_item}"'''

@@ -88,7 +88,7 @@ pipeline {
                           withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY')]) 
                           { 
                             sh("rm -rf repo_result.txt")
-                            sh("git ls-remote https://github.com/lauraanddola/pipeline0813.git &> repo_result.txt")
+                            sh("git ls-remote https://github.com/lauraanddola/pipeline0813.git |grep `not found` &> repo_result.txt")
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')
                             println "repo result is : ${repo_isFound}"

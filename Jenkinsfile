@@ -161,7 +161,7 @@ def checkRepExisted(){
 sh("ls -lrt")
 sh("mkdir reo_temp")
 sh("ls -lrt")
-sh("cd "repo_temp")
+sh("cd repo_temp")
 sh('git init')
 sh('git add .')
 sh('git commit -m "first commit"')

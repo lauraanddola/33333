@@ -39,8 +39,8 @@ pipeline {
                 sh 'mkdir 0812_test&&chmod 777 0812_test'
                 sh 'cd 0812_test'
                 git(
-                    url: "${repo_base[0]}",
-
+                    //url: "${repo_base[0]}",
+                    url: "https://github.com/lauraanddola/helmRepo.git"
                     credentialsId: 'laura_test6',
                     branch: "master"
                 )

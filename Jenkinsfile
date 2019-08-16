@@ -20,9 +20,9 @@ pipeline {
     stages {
         stage('test') {
             steps {
-                //checkRepExisted(source_repo_list)
+                checkRepExisted(source_repo_list)
                script{
-                    getBranches() 
+                    //getBranches() 
                     cpToRemote()
                }
                   
@@ -37,13 +37,13 @@ pipeline {
     }
 }
 
-def getBranches() {
+def getBranches(source_repo) {
    script{
        sh 'rm -rf *'
        sh 'git  remote rm  origin'
        git(
-           //url: "${repo_base[0]}",
-           url: "https://github.com/lauraanddola/helmRepo.git",
+           url: "${source_Repo}",
+           //url: "https://github.com/lauraanddola/helmRepo.git",
            credentialsId: 'laura_test6',
            branch: "master"
        )
@@ -78,12 +78,13 @@ def getBranches() {
 
 def cpToRemote(){
     for (int i =0; i < source_repo_list.size(); i++){
-        for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
+       getBranches(${source_repo_list[i]}) 
+       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
             sh 'git remote rm origin'
             println  "Start to sync ${branch_item}"
             sh 'pwd'
             sh "ls -lrt"
-            sh "rm -rf *"
+            //sh "rm -rf *"
             git(
                 url: "${source_repo_list[i]}",
                 credentialsId: 'laura_test6',

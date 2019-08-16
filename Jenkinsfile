@@ -42,7 +42,7 @@ def getBranches(String source_repo) {
        sh 'rm -rf *'
        sh 'git  remote rm  origin'
        git(
-           url: "${source_Repo}",
+           url: "${source_repo}",
            //url: "https://github.com/lauraanddola/helmRepo.git",
            credentialsId: 'laura_test6',
            branch: "master"

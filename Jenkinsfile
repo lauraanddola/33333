@@ -61,9 +61,25 @@ pipeline {
                         fi
 
                      done < "$filename"  '''
-                    for (int i =0; i < source_repo_list.size(); i++){
+                     cpToRemote()
+                    }
+                  
+             }
+            }
+        }
+   
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
+
+def cpToRemote(){
+ for (int i =0; i < source_repo_list.size(); i++){
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
-                          sh 'git remote rm origin'   
+                          sh 'git remote rm origin'
                           println  "Start to sync ${branch_item}"
                           sh 'pwd'
                           sh "ls -lrt"
@@ -82,7 +98,7 @@ pipeline {
                           sh  'git remote rm origin'
                           sh  "git remote add origin ${target_repo_list[i]}"
                           sh  'git remote -v'
-                          sh  "git push origin ${branch_item} --force"                         
+                          sh  "git push origin ${branch_item} --force"
                           //sh  'git push origin --all'
                           sh  "git push --tags"
 
@@ -90,21 +106,8 @@ pipeline {
                           sh  ' pwd'
                           sh  'echo "3333"'
                          }
-                     }                  
-                  }
-                  
-             }
-            }
-        }
-   
-
-    post {
-        always {
-            cleanWs()
-        }
-    }
+                     }
 }
-
 
 def checkRepExisted(list) { 
 

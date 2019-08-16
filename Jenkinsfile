@@ -14,6 +14,7 @@ pipeline {
         string(defaultValue: '', description: 'Git Branch to be used for Rundeck repo', name: 'GIT_BRANCH')
     }
 
+
     options {
            buildDiscarder(logRotator(artifactDaysToKeepStr: '7', daysToKeepStr: '90'))
     }
@@ -21,9 +22,11 @@ pipeline {
     stages {
 
         stage('test') {
+
             steps {
-                checkRepExisted(source_repo_list)
+                //checkRepExisted(source_repo_list)
                script{
+                    getBranches() 
                     cpToRemote()
                     }
                   
@@ -39,12 +42,12 @@ pipeline {
     }
 }
 
-def fetchRepoBranch(source_repo_url){
- script{
+def getBranches() {
+   script{
                 sh 'rm -rf *'
                 sh 'git  remote rm  origin'
                 git(
-                    //url: "${source_repo_url}",
+                    //url: "${repo_base[0]}",
                     url: "https://github.com/lauraanddola/helmRepo.git",
                     credentialsId: 'laura_test6',
                     branch: "master"
@@ -71,6 +74,7 @@ def fetchRepoBranch(source_repo_url){
                         echo "${substr:2}"  >> "${file_new}"
                         ls -lrt
 
+
                         pwd
                         fi
 
@@ -80,7 +84,6 @@ def fetchRepoBranch(source_repo_url){
 
 def cpToRemote(){
  for (int i =0; i < source_repo_list.size(); i++){
-              fetchRepoBranch(${source_repo_list[i]})
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
                           sh 'git remote rm origin'
                           println  "Start to sync ${branch_item}"

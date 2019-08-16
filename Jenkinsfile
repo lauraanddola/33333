@@ -24,7 +24,7 @@ pipeline {
 
             steps {
                 checkRepExisted(targetRepoList)
-                
+               script{
                 sh 'rm -rf *'
                 sh 'git  remote rm  origin'
                 git(
@@ -60,7 +60,6 @@ pipeline {
                         fi
 
                      done < "$filename"  '''
-                 script{
                     for (int i =0; i < targetRepoList.size(); i++){
                       target_url = "${targetRepoList[i]}" 
                       

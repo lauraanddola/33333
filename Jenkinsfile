@@ -134,7 +134,7 @@ def checkRepExisted(list) {
                             if (repo_isFound.contains("not found")) {
                                println "666666 repo not found"
                                withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
-                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"22222"}' https://api.github.com/user/repos''')
+                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"33333"}' https://api.github.com/user/repos''')
 sh("ls -lrt")
 sh("rm -rf *")
 sh("mkdir repo_temp")

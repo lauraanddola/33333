@@ -30,9 +30,11 @@ pipeline {
     stages {
 
         stage('test') {
-            targetRepoList.each { item -> checkRepExisted(${item}) }
 
             steps {
+                script {
+                   targetRepoList.each { item -> checkRepExisted(${item}) }
+                }
                 sh "echo hihihi1111111"
                 sh "echo $USER_CREDENTIALS_USR"
                 

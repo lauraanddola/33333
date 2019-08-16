@@ -78,7 +78,7 @@ def getBranches(source_repo) {
 
 def cpToRemote(){
     for (int i =0; i < source_repo_list.size(); i++){
-       getBranches(${source_repo_list[i]}) 
+       getBranches("${source_repo_list[i]}") 
        for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
             sh 'git remote rm origin'
             println  "Start to sync ${branch_item}"

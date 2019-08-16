@@ -96,8 +96,8 @@ pipeline {
                           sh  'git remote rm origin'
                           sh  'git remote add origin https://github.com/lauraanddola/22222.git'
                           sh  'git remote -v'
-                          sh  "git push origin ${branch_item} --force"                         
-                          //sh  'git push origin --all'
+                          //sh  "git push origin ${branch_item} --force"                         
+                          sh  'git push origin --all'
                           sh  "git push --tags"
 
                           sh  '''echo "End of sync ${branch_item}"'''
@@ -145,6 +145,7 @@ def checkRepExisted(){
                                withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
                                     sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"22222"}' https://api.github.com/user/repos''')
 sh("ls -lrt")
+sh("rm -rf *")
 sh("mkdir repo_temp")
 sh("ls -lrt")
 sh("cd repo_temp")

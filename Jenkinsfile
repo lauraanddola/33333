@@ -69,24 +69,11 @@ pipeline {
                         echo "${substr:2}"  >> "${file_new}"
                         ls -lrt
 
-                        echo "${substr}"| git ls-remote   &>repo_result.txt || EXIT_CODE=$?
 
                         pwd
                         fi
 
                      done < "$filename"  '''
-                 sh '''
-                     echo "https://github.com/lauraanddola/22222.git" >> "repo_url.txt"
-                    '''
-                 script{
-                    for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
-                       sh  'git branch'
-                       sh  '''subtr = 'echo "$branch_item"'
-                              echo "9999: ${subtr}"
-                              echo "${subtr}"| git ls-remote   &>repo_result.txt || EXIT_CODE=$?'''
-                       sh  "echo yyyyyy"
-                    }
-                 } 
                  script{
                     env.WORKSPACE = pwd() 
                       

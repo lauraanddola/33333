@@ -62,8 +62,6 @@ pipeline {
 
                      done < "$filename"  '''
                     for (int i =0; i < source_repo_list.size(); i++){
-                      target_url = "${source_repo_list[i]}" 
-                      target_url2 = "https://github.com/lauraanddola/22222.git"                      
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
                           sh 'git remote rm origin'   
                           println  "Start to sync ${branch_item}"
@@ -71,8 +69,7 @@ pipeline {
                           sh "ls -lrt"
                           sh "rm -rf *"
                           git(
-                              //url: 'https://github.com/lauraanddola/helmRepo.git',
-                              url: "${target_url}",
+                              url: "${source_repo_list[i]}",
                               credentialsId: 'laura_test6',
                               branch: "${branch_item}"
                            )
@@ -83,11 +80,9 @@ pipeline {
                           sh  'git branch -a'
                           sh  'git remote -v'
                           sh  'git remote rm origin'
-                          //sh  'git remote add origin https://github.com/lauraanddola/22222.git'
                           sh  "git remote add origin ${target_repo_list[i]}"
                           sh  'git remote -v'
                           sh  "git push origin ${branch_item} --force"                         
-                         // sh  'git pull'
                           //sh  'git push origin --all'
                           sh  "git push --tags"
 

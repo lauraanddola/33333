@@ -69,6 +69,7 @@ pipeline {
                           println  "Start to sync ${branch_item}"
                           sh 'pwd'
                           sh "ls -lrt"
+                          sh "rm -rf *"
                           git(
                               //url: 'https://github.com/lauraanddola/helmRepo.git',
                               url: "${target_url}",

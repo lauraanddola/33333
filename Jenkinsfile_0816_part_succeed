@@ -1,17 +1,12 @@
 node {
 
-  // customWorkspace '/Users/i356558/jenkins_mac_666'
    branch_abc =['a', 'b', 'c']
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
-   def  branch_from_file
   // targetRepoList = ['https://github.com/lauraanddola/11111.git', 'https://github.com/lauraanddola/22222.git']
   targetRepoList = ['https://github.com/lauraanddola/helmRepo.git']
 }
 pipeline {
     agent any
-    environment {
-        USER_CREDENTIALS = credentials('laura_test6')
-    }
 
     parameters {
           booleanParam(defaultValue: true, description: '', name: 'userFlag')
@@ -29,13 +24,8 @@ pipeline {
 
             steps {
                 checkRepExisted(targetRepoList)
-                sh "echo hihihi1111111"
-                sh "echo $USER_CREDENTIALS_USR"
                 
-                sh 'echo "execute say hello script:"'
-                sh 'rm -rf 0812_test branch_all.txt file_new.txt'
-                sh 'mkdir 0812_test&&chmod 777 0812_test'
-                sh 'cd 0812_test'
+                sh 'rm -rf *'
                 sh 'git  remote rm  origin'
                 git(
                     //url: "${repo_base[0]}",
@@ -71,18 +61,12 @@ pipeline {
 
                      done < "$filename"  '''
                  script{
-                    env.WORKSPACE = pwd() 
                     for (int i =0; i < targetRepoList.size(); i++){
                       target_url = "${targetRepoList[i]}" 
                       
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
       
                           println  "Start to sync ${branch_item}"
-                          sh 'pwd'
-                          sh "rm -rf repo_temp"
-                          sh "mkdir repo_temp"
-                          sh "ls -lrt"
-                          sh "cd repo_temp"
                           sh 'pwd'
                           sh "ls -lrt"
                           git(
@@ -91,7 +75,6 @@ pipeline {
                               credentialsId: 'laura_test6',
                               branch: "${branch_item}"
                            )
-                          sh  'pwd'
 
                           sh  "git checkout ${branch_item}"
                           sh  'git fetch --tags'
@@ -107,17 +90,11 @@ pipeline {
                           sh  "git push --tags"
 
                           sh  '''echo "End of sync ${branch_item}"'''
-                          sh  'cd ..'
                           sh  ' pwd'
                           sh  'echo "3333"'
                          }
                      }                  
                   }
-                  sh '''
-                    cat ${file_new}
-                   
-                    cd ..
-                  '''
                   
              }
             }

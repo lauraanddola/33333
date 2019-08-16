@@ -92,7 +92,7 @@ pipeline {
                           sh "ls -lrt"
                           git(
                               //url: 'https://github.com/lauraanddola/helmRepo.git',
-                              url: "${target_url}"
+                              url: "${target_url}",
                               credentialsId: 'laura_test6',
                               branch: "${branch_item}"
                            )

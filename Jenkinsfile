@@ -9,7 +9,8 @@ node {
    branch_abc =['a', 'b', 'c']
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
    def  branch_from_file
-   targetRepoList = ['https://github.com/lauraanddola/11111.git', 'https://github.com/lauraanddola/22222.git']
+  // targetRepoList = ['https://github.com/lauraanddola/11111.git', 'https://github.com/lauraanddola/22222.git']
+  targetRepoList = ['https://github.com/lauraanddola/helmRepo.git'']
 }
 pipeline {
     agent any
@@ -32,7 +33,7 @@ pipeline {
         stage('test') {
 
             steps {
-                checkRepExisted(targetRepoList)
+                //checkRepExisted(targetRepoList)
                 sh "echo hihihi1111111"
                 sh "echo $USER_CREDENTIALS_USR"
                 
@@ -76,6 +77,8 @@ pipeline {
                      done < "$filename"  '''
                  script{
                     env.WORKSPACE = pwd() 
+                    for (int i =0; i < targetRepoList.size(); i++){
+                      target_url = "${targetRepoList[i]}" 
                       
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
       
@@ -88,7 +91,8 @@ pipeline {
                           sh 'pwd'
                           sh "ls -lrt"
                           git(
-                              url: 'https://github.com/lauraanddola/helmRepo.git',
+                              //url: 'https://github.com/lauraanddola/helmRepo.git',
+                              url: "${target_url}"
                               credentialsId: 'laura_test6',
                               branch: "${branch_item}"
                            )
@@ -111,8 +115,8 @@ pipeline {
                           sh  ' pwd'
                           sh  'echo "3333"'
                          }
-                   }                  
-
+                     }                  
+                  }
                   sh '''
                     cat ${file_new}
                    

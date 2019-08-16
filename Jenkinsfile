@@ -4,7 +4,7 @@ node {
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
   // targetRepoList = ['https://github.com/lauraanddola/11111.git', 'https://github.com/lauraanddola/22222.git']
   
-  targetRepoList = ['https://github.com/lauraanddola/helmRepo.git']
+    source_repo_list = ['https://github.com/lauraanddola/helmRepo.git']
 }
 pipeline {
     agent any
@@ -24,7 +24,7 @@ pipeline {
         stage('test') {
 
             steps {
-                checkRepExisted(targetRepoList)
+                checkRepExisted(source_repo_list)
                script{
                 sh 'rm -rf *'
                 sh 'git  remote rm  origin'
@@ -61,8 +61,8 @@ pipeline {
                         fi
 
                      done < "$filename"  '''
-                    for (int i =0; i < targetRepoList.size(); i++){
-                      target_url = "${targetRepoList[i]}" 
+                    for (int i =0; i < source_repo_list.size(); i++){
+                      target_url = "${source_repo_list[i]}" 
                       target_url2 = "https://github.com/lauraanddola/22222.git"                      
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
       

@@ -106,9 +106,9 @@ pipeline {
                           sh  'git remote rm origin'
                           sh  'git remote add origin https://github.com/lauraanddola/22222.git'
                           sh  'git remote -v'
-                          sh  "git push origin ${branch_item} --force"                         
+                         // sh  "git push origin ${branch_item} --force"                         
                          // sh  'git pull'
-                         // sh  'git push origin --all'
+                          sh  'git push origin --all'
                           sh  "git push --tags"
 
                           sh  '''echo "End of sync ${branch_item}"'''
@@ -175,7 +175,7 @@ sh("cd repo_temp")
 sh("git branch")
 sh('git init')
 sh('git checkout master')
-sh('touch README.md')
+//sh('touch README.md')
 sh('git add .')
 sh('git commit -m "first commit"')
 sh('git remote -v')

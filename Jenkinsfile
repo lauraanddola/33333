@@ -14,7 +14,6 @@ pipeline {
         string(defaultValue: '', description: 'Git Branch to be used for Rundeck repo', name: 'GIT_BRANCH')
     }
 
-
     options {
            buildDiscarder(logRotator(artifactDaysToKeepStr: '7', daysToKeepStr: '90'))
     }
@@ -22,14 +21,30 @@ pipeline {
     stages {
 
         stage('test') {
-
             steps {
                 checkRepExisted(source_repo_list)
                script{
+                    cpToRemote()
+                    }
+                  
+             }
+            }
+        }
+   
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
+
+def fetchRepoBranch(source_repo_url){
+ script{
                 sh 'rm -rf *'
                 sh 'git  remote rm  origin'
                 git(
-                    //url: "${repo_base[0]}",
+                    //url: "${source_repo_url}",
                     url: "https://github.com/lauraanddola/helmRepo.git",
                     credentialsId: 'laura_test6',
                     branch: "master"
@@ -45,39 +60,27 @@ pipeline {
                      filename="branch_all.txt"
                      prefix_head="remotes/origin/"
                      file_new="branch_new.txt"
-                                    
+
                      while read -r line; do
                         name="$line"
                         #echo "Name read from file - $name"
-                        if [[ $line == *$prefix_head* ]]; then 
-                        echo "Match is $line"; 
+                        if [[ $line == *$prefix_head* ]]; then
+                        echo "Match is $line";
                         substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
                         echo "888: ${substr:15}"
                         echo "${substr:2}"  >> "${file_new}"
                         ls -lrt
 
-
                         pwd
                         fi
 
                      done < "$filename"  '''
-                     cpToRemote()
                     }
-                  
-             }
-            }
-        }
-   
-
-    post {
-        always {
-            cleanWs()
-        }
-    }
 }
 
 def cpToRemote(){
  for (int i =0; i < source_repo_list.size(); i++){
+              fetchRepoBranch(${source_repo_list[i]})
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
                           sh 'git remote rm origin'
                           println  "Start to sync ${branch_item}"

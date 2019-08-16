@@ -68,11 +68,11 @@ pipeline {
                         echo "888: ${substr:15}"
                         echo "${substr:2}"  >> "${file_new}"
                         ls -lrt
+
+                        echo "${substr}"| git ls-remote   &>repo_result.txt || EXIT_CODE=$?
+
                         pwd
                         fi
-                        subtr = 'echo "$line"'
-                              echo "9999: ${subtr}"
-                              echo "${subtr}"| git ls-remote   &>repo_result.txt || EXIT_CODE=$?
 
                      done < "$filename"  '''
                  sh '''

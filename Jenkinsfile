@@ -78,7 +78,7 @@ pipeline {
                     for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
                        sh  'git branch'
                        sh  "git checkout ${branch_item}"
-                       sh  "git ls-remote ${branch_item}  &>repo_result.txt || EXIT_CODE=$?"
+                       sh  '''git ls-remote "${branch_item}"  &>repo_result.txt || EXIT_CODE=$?'''
                        sh  "echo yyyyyy"
                     }
                  } 

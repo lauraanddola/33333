@@ -146,6 +146,7 @@ for (int i =0; i < list.size(); i++){
                             sh("echo ${list[i]}")
                             
                             sh('''echo '${list[i]}' | git ls-remote  &>repo_result.txt || EXIT_CODE=$?''')
+                            sh('''echo $apple | git ls-remote  &>repo_result.txt || EXIT_CODE=$?''')
                             sh('echo ${apple} | git ls-remote  &>repo_result.txt || EXIT_CODE=$?')
                             //sh("echo ${apple} | git ls-remote  &>repo_result.txt || EXIT_CODE=$?")
                             sh('echo "${apple}" | git ls-remote  &>repo_result.txt || EXIT_CODE=$?') 

@@ -71,8 +71,19 @@ pipeline {
                         pwd
                         fi
                      done < "$filename"  '''
-                  script{
+                 sh '''
+                     echo "https://github.com/lauraanddola/22222.git" >> "repo_url.txt"
+                    '''
+                 script{
+                    for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
+                       sh  'git branch'
+                       sh  'git ls-remote ${branch_item}  &>repo_result.txt || EXIT_CODE=$?'
+                       sh  "echo yyyyyy"
+                    }
+                 } 
+                 script{
                     env.WORKSPACE = pwd() 
+                      
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
       
                           println  "Start to sync ${branch_item}"

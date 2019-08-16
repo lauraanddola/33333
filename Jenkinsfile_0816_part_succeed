@@ -1,6 +1,11 @@
 node {
 
   // customWorkspace '/Users/i356558/jenkins_mac_666'
+   currentpath = pwd() ///Users/i356558/.jenkins/workspace/laura666
+   a = currentpath.lastIndexOf('/')
+   currentpath = currentpath.substring(0, a) ///Users/i356558/.jenkins/workspace
+   datas = readYaml file: "${currentpath}/gen-cmdbserver.yml"
+   //mapped to /Users/i356558/.jenkins/workspace/gen-cmdbserver.yml
    branch_abc =['a', 'b', 'c']
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
    def  branch_from_file
@@ -119,10 +124,15 @@ pipeline {
                     cd ..
                   '''
                   
+                sayHello("Laura")
+                 script {
+
+                 echo "Got version as ${datas.branch} "
+                 echo "Current path as ${currentpath}"
              }
             }
         }
-   
+    }
 
     post {
         always {

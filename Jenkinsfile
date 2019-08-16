@@ -133,7 +133,7 @@ pipeline {
     }
 }
 
-def checkRepExisted(targetUrl_git) 
+def checkRepExisted(targetUrl_git) { 
   withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')]) {
                             sh("echo $SSH_KEY_FOR_ABC")
                             sh("rm -rf repo_result.txt")

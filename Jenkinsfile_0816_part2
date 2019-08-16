@@ -1,9 +1,6 @@
 node {
-
-   branch_abc =['a', 'b', 'c']
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
    target_repo_list = ['https://github.com/lauraanddola/22222.git']
-  
    source_repo_list = ['https://github.com/lauraanddola/helmRepo.git']
 }
 pipeline {
@@ -14,27 +11,23 @@ pipeline {
         string(defaultValue: '', description: 'Git Branch to be used for Rundeck repo', name: 'GIT_BRANCH')
     }
 
-
     options {
            buildDiscarder(logRotator(artifactDaysToKeepStr: '7', daysToKeepStr: '90'))
     }
 
     stages {
-
         stage('test') {
-
             steps {
                 //checkRepExisted(source_repo_list)
                script{
                     getBranches() 
                     cpToRemote()
-                    }
+               }
                   
              }
-            }
         }
+    }
    
-
     post {
         always {
             cleanWs()
@@ -44,75 +37,74 @@ pipeline {
 
 def getBranches() {
    script{
-                sh 'rm -rf *'
-                sh 'git  remote rm  origin'
-                git(
-                    //url: "${repo_base[0]}",
-                    url: "https://github.com/lauraanddola/helmRepo.git",
-                    credentialsId: 'laura_test6',
-                    branch: "master"
-                )
-                sh 'git branch -a'
-                sh '''
-                     pwd
-                     prefix_head="remotes/origin/"
-                     git branch -a > branch_all.txt
-                     cat branch_all.txt
-                     chmod 777 branch_all.txt
+       sh 'rm -rf *'
+       sh 'git  remote rm  origin'
+       git(
+           //url: "${repo_base[0]}",
+           url: "https://github.com/lauraanddola/helmRepo.git",
+           credentialsId: 'laura_test6',
+           branch: "master"
+       )
+       sh 'git branch -a'
+       sh '''
+              pwd
+              prefix_head="remotes/origin/"
+              git branch -a > branch_all.txt
+              cat branch_all.txt
+              chmod 777 branch_all.txt
 
-                     filename="branch_all.txt"
-                     prefix_head="remotes/origin/"
-                     file_new="branch_new.txt"
+              filename="branch_all.txt"
+              prefix_head="remotes/origin/"
+              file_new="branch_new.txt"
 
-                     while read -r line; do
-                        name="$line"
-                        #echo "Name read from file - $name"
-                        if [[ $line == *$prefix_head* ]]; then
-                        echo "Match is $line";
-                        substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
-                        echo "888: ${substr:15}"
-                        echo "${substr:2}"  >> "${file_new}"
-                        ls -lrt
-
+               while read -r line; do
+                   name="$line"
+                   #echo "Name read from file - $name"
+                   if [[ $line == *$prefix_head* ]]; then
+                       echo "Match is $line";
+                       substr=`echo "$line" | sed 's/remotes//g' | sed 's/origin//g'`
+                       echo "888: ${substr:15}"
+                       echo "${substr:2}"  >> "${file_new}"
+                       ls -lrt
 
                         pwd
-                        fi
+                    fi
 
-                     done < "$filename"  '''
-                    }
+               done < "$filename"  '''
+    }
 }
 
 def cpToRemote(){
- for (int i =0; i < source_repo_list.size(); i++){
-                      for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
-                          sh 'git remote rm origin'
-                          println  "Start to sync ${branch_item}"
-                          sh 'pwd'
-                          sh "ls -lrt"
-                          sh "rm -rf *"
-                          git(
-                              url: "${source_repo_list[i]}",
-                              credentialsId: 'laura_test6',
-                              branch: "${branch_item}"
-                           )
+    for (int i =0; i < source_repo_list.size(); i++){
+        for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
+            sh 'git remote rm origin'
+            println  "Start to sync ${branch_item}"
+            sh 'pwd'
+            sh "ls -lrt"
+            sh "rm -rf *"
+            git(
+                url: "${source_repo_list[i]}",
+                credentialsId: 'laura_test6',
+                branch: "${branch_item}"
+             )
 
-                          sh  "git checkout ${branch_item}"
-                          sh  'git fetch --tags'
-                          sh  'git tag'
-                          sh  'git branch -a'
-                          sh  'git remote -v'
-                          sh  'git remote rm origin'
-                          sh  "git remote add origin ${target_repo_list[i]}"
-                          sh  'git remote -v'
-                          sh  "git push origin ${branch_item} --force"
-                          //sh  'git push origin --all'
-                          sh  "git push --tags"
+             sh  "git checkout ${branch_item}"
+             sh  'git fetch --tags'
+             sh  'git tag'
+             sh  'git branch -a'
+             sh  'git remote -v'
+             sh  'git remote rm origin'
+             sh  "git remote add origin ${target_repo_list[i]}"
+             sh  'git remote -v'
+             sh  "git push origin ${branch_item} --force"
+             //sh  'git push origin --all'
+             sh  "git push --tags"
 
-                          sh  '''echo "End of sync ${branch_item}"'''
-                          sh  ' pwd'
-                          sh  'echo "3333"'
-                         }
-                     }
+             sh  '''echo "End of sync ${branch_item}"'''
+             sh  ' pwd'
+             sh  'echo "3333"'
+         }
+    }
 }
 
 def checkRepExisted(list) { 

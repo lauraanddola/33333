@@ -1,7 +1,9 @@
 node {
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
-   target_repo_list = ['https://github.com/lauraanddola/22222.git']
-   source_repo_list = ['https://github.com/lauraanddola/helmRepo.git']
+   //target_repo_list = ['https://github.com/lauraanddola/22222.git']
+   //source_repo_list = ['https://github.com/lauraanddola/helmRepo.git']
+   target_repo_list = ['https://github.com/lauraanddola/22222.git','https://github.com/lauraanddola/33333.git']
+   source_repo_list = ['https://github.com/lauraanddola/helmRepo.git','https://github.com/lauraanddola/pipeline0812.git']
 }
 pipeline {
     agent any
@@ -124,7 +126,7 @@ def checkRepExisted(list) {
                        //     sh('echo ${apple} | git ls-remote  &>repo_result.txt || EXIT_CODE=$?')
                             //sh("echo ${apple} | git ls-remote  &>repo_result.txt || EXIT_CODE=$?")
                      //       sh('echo "${apple}" | git ls-remote  &>repo_result.txt || EXIT_CODE=$?') 
-                            sh('git ls-remote https://github.com/lauraanddola/22222.git &>repo_result.txt || EXIT_CODE=$?')
+                            sh('git ls-remote https://github.com/lauraanddola/33333.git &>repo_result.txt || EXIT_CODE=$?')
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')
                             println "repo result is : ${repo_isFound}"
@@ -145,7 +147,7 @@ sh('git add .')
 sh('git commit -m "first commit"')
 sh('git remote -v')
 sh('git remote rm origin')
-sh('git remote add origin https://github.com/lauraanddola/22222.git')
+sh('git remote add origin https://github.com/lauraanddola/33333.git')
 sh('git push origin master --force')
 sh('cd ..')
 sh('rm -rf repo_temp')   

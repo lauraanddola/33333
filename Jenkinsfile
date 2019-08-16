@@ -3,6 +3,7 @@ node {
    branch_abc =['a', 'b', 'c']
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
   // targetRepoList = ['https://github.com/lauraanddola/11111.git', 'https://github.com/lauraanddola/22222.git']
+  
   targetRepoList = ['https://github.com/lauraanddola/helmRepo.git']
 }
 pipeline {
@@ -62,7 +63,7 @@ pipeline {
                      done < "$filename"  '''
                     for (int i =0; i < targetRepoList.size(); i++){
                       target_url = "${targetRepoList[i]}" 
-                      
+                      target_url2 = "https://github.com/lauraanddola/22222.git"                      
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
       
                           println  "Start to sync ${branch_item}"
@@ -82,7 +83,8 @@ pipeline {
                           sh  'git branch -a'
                           sh  'git remote -v'
                           sh  'git remote rm origin'
-                          sh  'git remote add origin https://github.com/lauraanddola/22222.git'
+                          //sh  'git remote add origin https://github.com/lauraanddola/22222.git'
+                          sh  "git remote add origin ${target_url2}"
                           sh  'git remote -v'
                           sh  "git push origin ${branch_item} --force"                         
                          // sh  'git pull'

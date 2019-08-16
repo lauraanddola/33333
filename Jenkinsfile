@@ -37,7 +37,7 @@ pipeline {
     }
 }
 
-def getBranches(source_repo) {
+def getBranches(String source_repo) {
    script{
        sh 'rm -rf *'
        sh 'git  remote rm  origin'

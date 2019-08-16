@@ -10,7 +10,7 @@ node {
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
    def  branch_from_file
   // targetRepoList = ['https://github.com/lauraanddola/11111.git', 'https://github.com/lauraanddola/22222.git']
-  targetRepoList = ['https://github.com/lauraanddola/helmRepo.git'']
+  targetRepoList = ['https://github.com/lauraanddola/helmRepo.git']
 }
 pipeline {
     agent any

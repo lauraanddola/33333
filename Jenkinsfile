@@ -65,7 +65,7 @@ pipeline {
                       target_url = "${source_repo_list[i]}" 
                       target_url2 = "https://github.com/lauraanddola/22222.git"                      
                       for (String branch_item : readFile('branch_new.txt').split("\r?\n")) {
-      
+                          sh 'git remote rm origin'   
                           println  "Start to sync ${branch_item}"
                           sh 'pwd'
                           sh "ls -lrt"

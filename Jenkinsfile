@@ -33,7 +33,7 @@ pipeline {
         stage('test') {
 
             steps {
-                //checkRepExisted(targetRepoList)
+                checkRepExisted(targetRepoList)
                 sh "echo hihihi1111111"
                 sh "echo $USER_CREDENTIALS_USR"
                 
@@ -143,30 +143,29 @@ pipeline {
 
 def checkRepExisted(list) { 
 
-for (int i =0; i < list.size(); i++){
-  apple = "${list[i]}"
-  println "apple is ${apple}"
+//for (int i =0; i < list.size(); i++){
+  //apple = "${list[i]}"
+  //println "apple is ${apple}"
   withCredentials([sshUserPrivateKey(credentialsId: 'laura_test6', keyFileVariable: 'SSH_KEY_FOR_ABC')]) {
                             sh("echo $SSH_KEY_FOR_ABC")
                             sh("rm -rf repo_result.txt")
                             sh("set -e")
                             sh("EXIT_CODE=0")
-                            sh("echo ${list[i]}")
+                           // sh("echo ${list[i]}")
                             
-                            sh('''echo '${list[i]}' | git ls-remote  &>repo_result.txt || EXIT_CODE=$?''')
-                            sh('''echo $apple | git ls-remote  &>repo_result.txt || EXIT_CODE=$?''')
-                            sh('echo ${apple} | git ls-remote  &>repo_result.txt || EXIT_CODE=$?')
+                           // sh('''echo '${list[i]}' | git ls-remote  &>repo_result.txt || EXIT_CODE=$?''')
+                         //   sh('''echo $apple | git ls-remote  &>repo_result.txt || EXIT_CODE=$?''')
+                       //     sh('echo ${apple} | git ls-remote  &>repo_result.txt || EXIT_CODE=$?')
                             //sh("echo ${apple} | git ls-remote  &>repo_result.txt || EXIT_CODE=$?")
-                            sh('echo "${apple}" | git ls-remote  &>repo_result.txt || EXIT_CODE=$?') 
-                            //sh('git ls-remote https://github.com/lauraanddola/22222.git &>repo_result.txt || EXIT_CODE=$?')
-                            sh('git ls-remote ${list[i]} &>repo_result.txt || EXIT_CODE=$?')
+                     //       sh('echo "${apple}" | git ls-remote  &>repo_result.txt || EXIT_CODE=$?') 
+                            sh('git ls-remote https://github.com/lauraanddola/22222.git &>repo_result.txt || EXIT_CODE=$?')
                             sh("cat repo_result.txt")
                             String repo_isFound= readFile('repo_result.txt')
                             println "repo result is : ${repo_isFound}"
                             if (repo_isFound.contains("not found")) {
                                println "666666 repo not found"
                                withCredentials([string(credentialsId: 'laura_test', variable: 'SECRET')]) {
-                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"${list[i]}"}' https://api.github.com/user/repos''')
+                                    sh('''curl -H "Authorization: token ${SECRET}" --data '{"name":"22222"}' https://api.github.com/user/repos''')
 sh("ls -lrt")
 sh("rm -rf *")
 sh("mkdir repo_temp")
@@ -180,8 +179,7 @@ sh('git add .')
 sh('git commit -m "first commit"')
 sh('git remote -v')
 sh('git remote rm origin')
-//sh('git remote add origin https://github.com/lauraanddola/22222.git')
-sh("git remote add origin ${list[i]}")
+sh('git remote add origin https://github.com/lauraanddola/22222.git')
 sh('git push origin master --force')
 sh('cd ..')
 sh('rm -rf repo_temp')   

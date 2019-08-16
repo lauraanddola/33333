@@ -188,7 +188,7 @@ sh('rm -rf repo_temp')
                             }
   }
 }
-}
+//}
 def sayHello(String name = 'human') {
     echo "Hello, ${name}."
 }

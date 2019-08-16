@@ -31,8 +31,10 @@ pipeline {
 
         stage('test') {
             steps {
-                for(String targetUrl : targetRepoList) {
+                script{ 
+                  for(String targetUrl : targetRepoList) {
                     checkRepExisted(${targetUrl})
+                  }
                 }
                 sh "echo hihihi1111111"
                 sh "echo $USER_CREDENTIALS_USR"

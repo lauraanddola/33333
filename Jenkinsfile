@@ -9,7 +9,7 @@ node {
    branch_abc =['a', 'b', 'c']
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
    def  branch_from_file
-   def targetRepoList = ["https://github.com/lauraanddola/11111.git","https://github.com/lauraanddola/22222.git"]
+   def targetRepoList = ['https://github.com/lauraanddola/11111.git', 'https://github.com/lauraanddola/22222.git']
 }
 pipeline {
     agent any
@@ -30,12 +30,9 @@ pipeline {
     stages {
 
         stage('test') {
+            targetRepoList.each { item -> checkRepExisted(${item}) }
+
             steps {
-                script{ 
-                  for(String targetUrl : targetRepoList) {
-                    checkRepExisted(${targetUrl})
-                  }
-                }
                 sh "echo hihihi1111111"
                 sh "echo $USER_CREDENTIALS_USR"
                 

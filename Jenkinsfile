@@ -2,9 +2,9 @@ node {
 
    branch_abc =['a', 'b', 'c']
    repo_base=['https://github.com/lauraanddola/pipeline666.git']
-  // targetRepoList = ['https://github.com/lauraanddola/11111.git', 'https://github.com/lauraanddola/22222.git']
+   target_repo_list = ['https://github.com/lauraanddola/22222.git']
   
-    source_repo_list = ['https://github.com/lauraanddola/helmRepo.git']
+   source_repo_list = ['https://github.com/lauraanddola/helmRepo.git']
 }
 pipeline {
     agent any
@@ -84,7 +84,7 @@ pipeline {
                           sh  'git remote -v'
                           sh  'git remote rm origin'
                           //sh  'git remote add origin https://github.com/lauraanddola/22222.git'
-                          sh  "git remote add origin ${target_url2}"
+                          sh  "git remote add origin ${target_repo_list[i]}"
                           sh  'git remote -v'
                           sh  "git push origin ${branch_item} --force"                         
                          // sh  'git pull'
